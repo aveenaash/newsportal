@@ -11,32 +11,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cubic.dtos.NewsDTO;
+import com.cubic.dtos.PartnerNewsDTO;
 import com.cubic.services.NewsService;
 
 @RestController
-@RequestMapping(value = "/news")
-public class NewsController {
+@RequestMapping(value = "/partner/news")
+public class PartnerNewsController {
 
 	@Autowired
 	private NewsService newService;
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void createNews(@RequestBody NewsDTO newsDTO) {
-		newService.saveNews(newsDTO);
+	public void createNews(@RequestBody PartnerNewsDTO newsDTO) {
+		newService.savePartnerNews(newsDTO);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public NewsDTO getNews(@PathVariable(value = "id") Long id) {
-		return newService.getNewsById(id);
+	public PartnerNewsDTO getNews(@PathVariable(value = "id") final Long id, 
+																@RequestParam(value = "partnerId") final Long partnerId) {
+		return newService.getPartnerNewsById(partnerId,id);
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void removeNews(@PathVariable(value = "id") Long id) {
-		newService.deleteNewsById(id);
-	}
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public List<NewsDTO> getNewsForCreator(@RequestParam(value = "creator") String creator) {
-		return newService.getAllNewsForCreator(creator);
-	}
+//	
+//	@RequestMapping(value = "", method = RequestMethod.GET)
+//	public List<NewsDTO> getNewsForCreator(@RequestParam(value = "creator") String creator) {
+//		return newService.getAllNewsForCreator(creator);
+//	}
 }

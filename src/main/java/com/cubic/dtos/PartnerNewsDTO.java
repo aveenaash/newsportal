@@ -8,19 +8,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class NewsDTO implements Serializable {
+public class PartnerNewsDTO implements Serializable {
 
+	@JsonProperty("PartnerId")
 	private Long partnerId;
+	
+	@JsonProperty("Title")
 	private String title;
     
+	@JsonProperty("Content")
 	private String content;
 	
+	@JsonProperty("CreatorName")
 	private String creatorName;
 	
+	@JsonProperty("Tags")
 	private List<String> tags;
 	
+	@JsonProperty("CreatedAt")
 	private Date createdAt;
 
+	
 	public Long getPartnerId() {
 		return partnerId;
 	}

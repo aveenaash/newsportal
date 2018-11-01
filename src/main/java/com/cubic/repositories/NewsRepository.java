@@ -16,8 +16,21 @@ public class NewsRepository extends AbstractRepository {
 		entityManager.persist(newsEntity);
 	}
 	
+	@Transactional
+	public void delete(NewsEntity newsEntity) {
+		entityManager.remove(newsEntity);
+	}
+	
 	public NewsEntity findById(Long id) {
 		return entityManager.find(NewsEntity.class, id);
+	}
+	
+	public NewsEntity findByPartnerAndId(Long partnerId, Long id) {
+		Query query = (Query) entityManager.createQuery("select n from NewsEntity n where "
+				+ "n.id = :id AND n.partnerId =:partnerId");
+		query.setParameter("id", id);
+		query.setParameter("partnerId", partnerId);
+		return (NewsEntity) query.getSingleResult();
 	}
 	
 	public List<NewsEntity> findByCreator(String creator) {

@@ -17,6 +17,9 @@ public class NewsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Long id; 
 	
+	@Column(name = "partner_id")
+	private Long partnerId;
+	
 	@Column(name = "title")
 	private String title;
 	
@@ -89,6 +92,14 @@ public class NewsEntity {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public Long getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(Long partnerId) {
+		this.partnerId = partnerId;
 	}
 
 	@Override
